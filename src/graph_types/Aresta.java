@@ -1,13 +1,13 @@
-package graph_types;
-
 //@Fábio Henrique dos Reis Barbosa - Computer Science Student
-//ckasse que compõe a biblioteca de Grafos
+//classe que compõe a biblioteca de Grafos
 
 // A classe aresta possui duas variáveis de instância principais
 // ponta1 e ponta2, cada uma é do tipo Vertice e representam as
 // duas extremmidades da aresta, os outros atributos podem ajudar
 // a acessar a aresta, buscando por nome ou id e um elemento tag
 // caso seja necessário marcar a aresta com algum tipo de tag
+
+package graph_types;
 
 public class Aresta {
 	

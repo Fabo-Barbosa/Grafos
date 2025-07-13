@@ -1,5 +1,3 @@
-package graph_types;
-
 //@Fábio Henrique dos Reis Barbosa - Computer Science Student
 //classe que compõe a biblioteca de Grafos
 
@@ -7,6 +5,8 @@ package graph_types;
 // possui como variável de instância principal um id tipo int
 // e uma lista que guarda arestas adjacentes, os outros atributos
 // são auxiliares
+
+package graph_types;
 
 import java.util.ArrayList;
 
@@ -22,18 +22,18 @@ public class Vertice {
 	// contrutores com modificador de acesso protcted
 	// só é possível instanciar a classe por meio de classes do pacote
 	// construtor que recebe apenas um id
-	protected Vertice(int id) {
+	public Vertice(int id) {
 		this(id, "", "");
 	}
 	
 	// construtor que recebe nome e id
-	protected Vertice(int id, String nome) {
+	public Vertice(int id, String nome) {
 		this(id, nome, "");
 	}
 	
 	
 	// construtor que recebe nome, id e uma tag
-	protected Vertice(int id, String nome, String tag) {
+	public Vertice(int id, String nome, String tag) {
 		this.id = id;
 		this.tag = tag;
 		this.nome = nome;
@@ -43,7 +43,7 @@ public class Vertice {
 	// função usada pela classe Aresta
 	// adiciona uma aresta adjacente ao vertice
 	// e adiciona o vértice adjacente ao conjunto de vértices
-	protected void addAdjacencia(Aresta aresta) {
+	public void addAdjacencia(Aresta aresta) {
 		
 		Vertice aux = aresta.getPonta1();
 		if (aux == this) {
@@ -54,7 +54,7 @@ public class Vertice {
 			
 			this.vizinhanca.add(aux);
 			this.arestasAdjacentes.add(aresta);
-			incGrau();
+			this.incGrau();
 			
 		}
 	}
@@ -62,7 +62,7 @@ public class Vertice {
 	// função usada pela classe Aresta
 	// remove uma aresta adjacente ao vertice
 	// e remove o vértice adjacente ao conjunto de vértices
-	protected void removeAdjacencia(Aresta aresta) {
+	public void removeAdjacencia(Aresta aresta) {
 		
 		Vertice aux = aresta.getPonta1();
 		if (aux == this) {
@@ -75,7 +75,30 @@ public class Vertice {
 		
 		if (this.arestasAdjacentes.contains(aresta)) {
 			this.arestasAdjacentes.remove(aresta);
+			this.decGrau();
 		}
+	}
+	
+	public boolean isAdjacent(Vertice v) {
+		
+		if (this.vizinhanca.isEmpty())
+			return false;
+		
+		for (Vertice vaux : this.vizinhanca) {
+			
+			if (vaux == v)
+				return true;
+		}
+		
+		return false;
+	}
+	
+	public void addVertice(Vertice v) {
+		this.vizinhanca.add(v);
+	}
+	
+	public ArrayList<Vertice> getVizinhanca(){
+		return this.vizinhanca;
 	}
 	
 	
@@ -106,6 +129,10 @@ public class Vertice {
 
 	private void incGrau() {
 		this.grau++;
+	}
+	
+	private void decGrau() {
+		this.grau--;
 	}
 
 }
