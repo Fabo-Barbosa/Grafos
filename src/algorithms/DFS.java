@@ -11,15 +11,18 @@
 package algorithms;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+
+import graph_types.Grafo;
 import graph_types.GrafoLista;
 import graph_types.Vertice;
 
 
 public class DFS {
 	
-	private final String[] CORES = {"BRANCO", "CINZA", "PRETO"};
+	public static final String[] CORES = {"BRANCO", "CINZA", "PRETO"};
 	private int tempoAux;
 	private Map<String, Integer> modelo;
 	private ArrayList<Map<String, Integer>> resultados; //cada vertice é vinculado a um map da lista
@@ -37,8 +40,9 @@ public class DFS {
 		this.modelo.put("predecessor", null);
 	}
 	
-	
-	public void runDFS(GrafoLista g) {
+	// função será publica para ser utilizada em outras classes
+	// além de processar o algoritmo ela retornará resultados
+	public List<Map<String, Integer>> runDFS(GrafoLista g) {
 		
 		this.setGrafo(g);
 		
@@ -50,6 +54,11 @@ public class DFS {
 				dfsVisita(g.getVerticeById(u.get("id_contexto")));
 			}
 		}
+		return this.resultados;
+	}
+	
+	public Grafo getGrafoAtual() {
+		return this.grafoAtual;
 	}
 	
 	private void dfsVisita(Vertice u) {

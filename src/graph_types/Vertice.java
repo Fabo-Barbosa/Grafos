@@ -22,18 +22,18 @@ public class Vertice {
 	// contrutores com modificador de acesso protcted
 	// só é possível instanciar a classe por meio de classes do pacote
 	// construtor que recebe apenas um id
-	public Vertice(int id) {
+	protected Vertice(int id) {
 		this(id, "", "");
 	}
 	
 	// construtor que recebe nome e id
-	public Vertice(int id, String nome) {
+	protected Vertice(int id, String nome) {
 		this(id, nome, "");
 	}
 	
 	
 	// construtor que recebe nome, id e uma tag
-	public Vertice(int id, String nome, String tag) {
+	protected Vertice(int id, String nome, String tag) {
 		this.id = id;
 		this.tag = tag;
 		this.nome = nome;
@@ -43,7 +43,7 @@ public class Vertice {
 	// função usada pela classe Aresta
 	// adiciona uma aresta adjacente ao vertice
 	// e adiciona o vértice adjacente ao conjunto de vértices
-	public void addAdjacencia(Aresta aresta) {
+	protected void addAdjacencia(Aresta aresta) {
 		
 		Vertice aux = aresta.getPonta1();
 		if (aux == this) {
@@ -62,7 +62,7 @@ public class Vertice {
 	// função usada pela classe Aresta
 	// remove uma aresta adjacente ao vertice
 	// e remove o vértice adjacente ao conjunto de vértices
-	public void removeAdjacencia(Aresta aresta) {
+	protected void removeAdjacencia(Aresta aresta) {
 		
 		Vertice aux = aresta.getPonta1();
 		if (aux == this) {
@@ -93,7 +93,7 @@ public class Vertice {
 		return false;
 	}
 	
-	public void addVertice(Vertice v) {
+	protected void addVertice(Vertice v) {
 		this.vizinhanca.add(v);
 	}
 	

@@ -12,6 +12,8 @@ public abstract class Grafo {
 	private String nome;
 	private int quantVertice;
 	private int quantAresta;
+	protected final int MAX_VERTICES = 50;
+	protected final int MAX_ARESTAS = (50 * this.MAX_VERTICES) / 2;
 	
 	public Grafo(String nome) {
 		this.nome = nome;

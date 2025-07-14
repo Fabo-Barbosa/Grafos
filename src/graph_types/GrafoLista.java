@@ -3,6 +3,7 @@
 
 // implementação de grafo utillizando as listas
 // de adjacências dos próprios vértices
+// é desejado que os vértices sejam criados a partir do Grafo
 
 package graph_types;
 
@@ -14,17 +15,42 @@ public class GrafoLista extends Grafo {
 	private ArrayList<Vertice> conjuntoDeVertices;
 	private ArrayList<Aresta> conjuntoDeArestas;
 	
+	// construtor
 	public GrafoLista(String nome) {
 		super(nome);
 		this.conjuntoDeArestas = new ArrayList<>();
 		this.conjuntoDeVertices = new ArrayList<>();
 	}
 	
+	// adiciona um vértice apenas com seu ID
+	// inicia de 1
 	public void addVertice() {
-		super.setQuantVertice();
-		this.conjuntoDeVertices.add(new Vertice(super.getQuantVertice()));
+		if (super.getQuantVertice() < super.MAX_VERTICES) {
+			super.setQuantVertice();
+			this.conjuntoDeVertices.add(new Vertice(super.getQuantVertice()));
+		
+		} else {
+			System.out.println("Grafo possui o máximo de vertices!!!");
+		}
 	}
 	
+	public void addVertices(int quant) {
+		if (
+			(super.getQuantVertice() + quant < super.MAX_VERTICES) &&
+			(quant > 0)) {
+			
+			for (int i = 0; i < quant; i++) {
+				super.setQuantVertice();
+				this.conjuntoDeVertices.add(new Vertice(super.getQuantVertice()));
+			}
+		} else {
+			System.out.println("Não é possível adicionar essa quantidade!!!");
+		}
+	}
+	
+	// adiciona uma aresta entre dois vértices que ainda não estão
+	// conectados, caso o grafo tenha 1 ou nenhum vértice ele mata a função
+	// ideia: Adaptar para retornar um booleano
 	public void addAresta(int idVertice1, int idVertice2) {
 		
 		if (super.getQuantVertice() < 2) {
@@ -54,6 +80,7 @@ public class GrafoLista extends Grafo {
 		}
 	}
 	
+	// verifica se dois vértices estão conectados por uma aresta
 	public boolean isConect(int idVertice1, int idVertice2) {
 		
 		if (super.getQuantVertice() < 2) 
@@ -69,6 +96,7 @@ public class GrafoLista extends Grafo {
 		
 	}
 	
+	// retorna um vértice utilizando um ID válido
 	public Vertice getVerticeById(int id) {
 		
 		if (id < 1) {
