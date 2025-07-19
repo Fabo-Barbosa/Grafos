@@ -22,7 +22,7 @@ import graph_types.Vertice;
 
 public class DFS {
 	
-	public static final String[] CORES = {"BRANCO", "CINZA", "PRETO"};
+	private static final String[] CORES = {"BRANCO", "CINZA", "PRETO"};
 	private int tempoAux;
 	private Map<String, Integer> modelo;
 	private ArrayList<Map<String, Integer>> resultados; //cada vertice é vinculado a um map da lista
@@ -114,6 +114,17 @@ public class DFS {
 		}
 		
 		this.grafoAtual = g;
+	}
+	
+	// função com a finalidade unicamente de teste
+	public void showResults() {
+		
+		System.out.println("id\tcor\tdescoberta\tfinalização\tpredecessor");
+		
+		for (Map<String, Integer> m: this.resultados) {
+			System.out.printf("%d\t%s\t\t%d\t%d\t\t%d%n", m.get("id_contexto"), DFS.CORES[m.get("cor")],
+					m.get("descoberta"), m.get("finalizacao"), m.get("predecessor"));
+		}
 	}
 
 }

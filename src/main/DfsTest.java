@@ -7,13 +7,22 @@
 
 package main;
 
+import algorithms.DFS;
 import graph_types.GrafoLista;
 
 public class DfsTest {
 
 	public static void main(String[] args) {
 		GrafoLista g = new GrafoLista("Grafo 1");
-		System.out.println(g.getNome());
+		DFS algoritmoDfs = new DFS();
+		
+		g.addVertices(3);
+		g.addAresta(1, 3);
+		g.addAresta(2, 3);
+		g.addAresta(2, 1);
+		
+		algoritmoDfs.runDFS(g);
+		algoritmoDfs.showResults();
 	}
 
 }
