@@ -38,19 +38,19 @@ public class VerticeDFS {
 		return predecesso;
 	}
 
-	public void setCor(String cor) {
+	protected void setCor(String cor) {
 		this.cor = cor;
 	}
 
-	public void setTempoDeDescoberta(int tempoDeDescoberta) {
+	protected void setTempoDeDescoberta(int tempoDeDescoberta) {
 		this.tempoDeDescoberta = tempoDeDescoberta;
 	}
 
-	public void setTempoDeFinalizacao(int tempoDeFinalizacao) {
+	protected void setTempoDeFinalizacao(int tempoDeFinalizacao) {
 		this.tempoDeFinalizacao = tempoDeFinalizacao;
 	}
 
-	public void setPredecesso(Vertice predecesso) {
+	protected void setPredecesso(Vertice predecesso) {
 		this.predecesso = predecesso;
 	}
 }
