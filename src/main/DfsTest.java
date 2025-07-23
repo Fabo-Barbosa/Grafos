@@ -8,21 +8,38 @@
 package main;
 
 import algorithms.DFS;
+import algorithms.VerticeDFS;
 import graph_types.GrafoLista;
 
 public class DfsTest {
 
 	public static void main(String[] args) {
 		GrafoLista g = new GrafoLista("Grafo 1");
-		DFS algoritmoDfs = new DFS();
+		VerticeDFS[] listaDeResultados;
 		
 		g.addVertices(3);
 		g.addAresta(1, 3);
 		g.addAresta(2, 3);
 		g.addAresta(2, 1);
 		
-		algoritmoDfs.runDFS(g);
-		algoritmoDfs.showResults();
+		listaDeResultados = DFS.runDFS(g);
+		
+		// Vertice
+		// cor
+		// td - Tempo de descoberta
+		// tf - Tempo de finalizacao
+		// Vertice predecessor
+		System.out.println("Vertice\tcor\ttd\ttf\tPredecessor");
+		
+		for (VerticeDFS v: listaDeResultados) {
+			
+			System.out.printf("%d\t%s\t%d\t%d\t%d%n", 
+					v.getVerticeContexto().getId(),
+					v.getCor(),
+					v.getTempoDeDescoberta(),
+					v.getTempoDeFinalizacao(),
+					v.getPredecesso() == null? null : v.getPredecesso().getId());
+		}
 	}
 
 }

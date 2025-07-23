@@ -10,121 +10,74 @@
 
 package algorithms;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-
-import graph_types.Grafo;
 import graph_types.GrafoLista;
 import graph_types.Vertice;
 
-
-public class DFS {
+public abstract class DFS {
 	
-	private static final String[] CORES = {"BRANCO", "CINZA", "PRETO"};
-	private int tempoAux;
-	private Map<String, Integer> modelo;
-	private ArrayList<Map<String, Integer>> resultados; //cada vertice é vinculado a um map da lista
-	private GrafoLista grafoAtual;
+	private static int tempoAux;
+	private static VerticeDFS[] resultados; //cada vertice é vinculado a um map da lista
 	
-	public DFS() {
-		// construtor padrão
-		this.resultados = new ArrayList<Map<String,Integer>>();
-		this.modelo = new HashMap<String, Integer>();
-		
-		this.modelo.put("id_contexto", null);
-		this.modelo.put("cor", 0);
-		this.modelo.put("descoberta", 0);
-		this.modelo.put("finalizacao", 0);
-		this.modelo.put("predecessor", null);
+	// função criará uma lista de VerticeDFS com os seus contextos
+	private static void initilize(GrafoLista g) {
+			
+		resultados = new VerticeDFS[g.getConjuntoDeVertices().size()];
+		int count = 0;
+			
+		for (Vertice v: g.getConjuntoDeVertices()) {
+			VerticeDFS aux = new VerticeDFS(v);
+			resultados[count] = aux;
+			count++;
+		}
 	}
 	
 	// função será publica para ser utilizada em outras classes
 	// além de processar o algoritmo ela retornará resultados
-	public List<Map<String, Integer>> runDFS(GrafoLista g) {
+	public static VerticeDFS[] runDFS(GrafoLista g) {
 		
-		this.setGrafo(g);
+		initilize(g);
 		
 		tempoAux = 0;
 		
-		for (Map<String, Integer> u : this.resultados) {
+		for (VerticeDFS u : resultados) {
 			
-			if(u.get("cor") == 0) {
-				dfsVisita(g.getVerticeById(u.get("id_contexto")));
+			if(u.getCor() == VerticeDFS.BRANCO) {
+				dfsVisita(u);
 			}
 		}
-		return this.resultados;
+		return resultados;
 	}
 	
-	public Grafo getGrafoAtual() {
-		return this.grafoAtual;
-	}
-	
-	private void dfsVisita(Vertice u) {
+	// função recursiva do algoritmo
+	private static void dfsVisita(VerticeDFS u) {
 		tempoAux++;
-		Map<String, Integer> contexto = this.getContexto(u.getId());
 		
-		contexto.replace("descoberta", tempoAux);
-		contexto.replace("cor", 1);
+		u.setTempoDeDescoberta(tempoAux);
+		u.setCor(VerticeDFS.CINZA);
 		
-		for (Vertice v : u.getVizinhanca()) {
-			if (this.getContexto(v.getId()).get("cor").equals(0)) {
-				this.getContexto(v.getId()).replace("predecessor", u.getId());
-				dfsVisita(v);
+		for (Vertice v : u.getVerticeContexto().getVizinhanca()) {
+			if (getContexto(v.getId()).getCor().equals(VerticeDFS.BRANCO)) {
+				getContexto(v.getId()).setPredecesso(u.getVerticeContexto());
+				dfsVisita(getContexto(v.getId()));
 			}
 		}
 		
-		contexto.replace("cor", 2);
+		u.setCor(VerticeDFS.PRETO);
 		tempoAux++;
-		contexto.replace("finalizacao", tempoAux);
+		u.setTempoDeFinalizacao(tempoAux);
 	}
 	
 	
 	// função que retorna o contexto em relação aos Maps da variável resultados
 	// recebe o id do vértice e percorre a lista procurando o Map de contexto
 	// retorna um Map incluído na lista resultados
-	private Map<String, Integer> getContexto(int id) {
+	private static VerticeDFS getContexto(int id) {
 		
-		for (Map<String, Integer> m: this.resultados) {
-			if (m.get("id_contexto") == id)
+		for (VerticeDFS m: resultados) {
+			if (m.getVerticeContexto().getId() == id)
 				return m;
 		}
 		return null;
-	}
-	
-	
-	//  função usada na própria classe para popular a variável resultados
-	// com valores iniciais e seus respectivos campos sendo:
-	// id do vértice contexto
-	// indice da cor do vértice
-	// tempo de descoberta
-	// tempo de finalização
-	// e id do vértice predecessor
-	private void setGrafo(GrafoLista g) {
-		
-		if (!(this.resultados.isEmpty()))
-			this.resultados.removeAll(this.resultados);
-		
-		for (Vertice v: g.getConjuntoDeVertices()) {
-			Map<String, Integer> mapDfs = new HashMap<String, Integer>();
-			mapDfs.putAll(modelo);
-			mapDfs.replace("id_contexto", v.getId());
-			this.resultados.add(mapDfs);
-		}
-		
-		this.grafoAtual = g;
-	}
-	
-	// função com a finalidade unicamente de teste
-	public void showResults() {
-		
-		System.out.println("id\tcor\tdescoberta\tfinalização\tpredecessor");
-		
-		for (Map<String, Integer> m: this.resultados) {
-			System.out.printf("%d\t%s\t\t%d\t%d\t\t%d%n", m.get("id_contexto"), DFS.CORES[m.get("cor")],
-					m.get("descoberta"), m.get("finalizacao"), m.get("predecessor"));
-		}
 	}
 
 }
