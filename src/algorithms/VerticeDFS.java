@@ -3,7 +3,7 @@ package algorithms;
 import graph_types.Vertice;
 
 public class VerticeDFS {
-	
+
 	private final Vertice contexto;
 	private String cor;
 	private int tempoDeDescoberta;
@@ -12,7 +12,7 @@ public class VerticeDFS {
 	protected static final String BRANCO = "Branco";
 	protected static final String CINZA = "Cinza";
 	protected static final String PRETO = "Preto";
-	
+
 	public VerticeDFS(Vertice contexto) {
 		this.contexto = contexto;
 		this.cor = VerticeDFS.BRANCO;
