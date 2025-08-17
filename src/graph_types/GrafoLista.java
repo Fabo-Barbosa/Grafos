@@ -8,14 +8,13 @@
 package graph_types;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import interfaces.Grafo;
-
-public class GrafoLista extends GrafoInicial implements Grafo {
+public class GrafoLista extends Grafo {
 
 	// conjuntos de vertices e arestas
-	private ArrayList<Vertice> conjuntoDeVertices;
-	private ArrayList<Aresta> conjuntoDeArestas;
+	private final List<Vertice> conjuntoDeVertices;
+	private final List<Aresta> conjuntoDeArestas;
 
 	// construtor
 	public GrafoLista(String nome) {
@@ -60,14 +59,14 @@ public class GrafoLista extends GrafoInicial implements Grafo {
 
 		}
 
-		if (this.isConect(idVertice1, idVertice2)) {
+		Vertice v1 = this.getVerticeById(idVertice1);
+		Vertice v2 = this.getVerticeById(idVertice2);
+		
+		if (v1.isAdjacent(v2) && v2.isAdjacent(v1)) {
 
 			System.out.println("Já existe uma aresta conectando esses vertices...");
 			return;
 		}
-
-		Vertice v1 = this.getVerticeById(idVertice1);
-		Vertice v2 = this.getVerticeById(idVertice2);
 
 		if (v1 == null || v2 == null) {
 
@@ -78,22 +77,6 @@ public class GrafoLista extends GrafoInicial implements Grafo {
 			super.setQuantAresta();
 			this.conjuntoDeArestas.add(new Aresta(v1, v2, super.getQuantidadeAresta()));
 		}
-	}
-
-	// verifica se dois vértices estão conectados por uma aresta
-	public boolean isConect(int idVertice1, int idVertice2) {
-
-		if (super.getQuantidadeVertice() < 2)
-			return false;
-
-		Vertice v1 = this.getVerticeById(idVertice1);
-		Vertice v2 = this.getVerticeById(idVertice2);
-
-		if (v1.isAdjacent(v2) && v2.isAdjacent(v1))
-			return true;
-		else
-			return false;
-
 	}
 
 	// retorna um vértice utilizando um ID válido
@@ -112,12 +95,29 @@ public class GrafoLista extends GrafoInicial implements Grafo {
 
 		return null;
 	}
+	
+	// retorna uma aresta utilizando um ID válido
+		public Aresta getArestaById(int id) {
 
-	public ArrayList<Vertice> getConjuntoDeVertices() {
+			if (id < 1) {
+				return null;
+			}
+
+			for (Aresta aux : this.conjuntoDeArestas) {
+
+				if (aux.getId() == id) {
+					return aux;
+				}
+			}
+
+			return null;
+		}
+
+	public List<Vertice> getConjuntoDeVertices() {
 		return conjuntoDeVertices;
 	}
 
-	public ArrayList<Aresta> getConjuntoDeArestas() {
+	public List<Aresta> getConjuntoDeArestas() {
 		return conjuntoDeArestas;
 	}
 

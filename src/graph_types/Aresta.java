@@ -13,7 +13,7 @@ public class Aresta {
 
 	private final int id;
 	private String nome;
-	private String tag;
+	private int value;
 	private Vertice ponta1;
 	private Vertice ponta2;
 
@@ -23,17 +23,11 @@ public class Aresta {
 	// um construtor sem informar o nome da aresta
 	protected Aresta(Vertice p1, Vertice p2, int id) {
 
-		this(p1, p2, id, "", "");
-	}
-
-	// Um construtor que incluui o nome
-	protected Aresta(Vertice p1, Vertice p2, int id, String nome) {
-
-		this(p1, p2, id, nome, "");
+		this(p1, p2, id, "");
 	}
 
 	// construtor que aceita também uma tag
-	protected Aresta(Vertice p1, Vertice p2, int id, String nome, String tag) {
+	protected Aresta(Vertice p1, Vertice p2, int id, String nome) {
 
 		// assim que o contrutor for chamado incrementa 1
 		// na quantidade de arestas e atribui ao id da aresta
@@ -42,12 +36,8 @@ public class Aresta {
 		this.ponta2 = p2;
 		this.id = id;
 		this.nome = nome;
-		this.tag = tag;
 
-		// só vai haver referência se forem diferentes
-		if (!(p1 == p2))
-			p1.addAdjacencia(this);
-		p2.addAdjacencia(this);
+		p1.addAdjacencia(this);
 
 	}
 
@@ -60,14 +50,6 @@ public class Aresta {
 		this.nome = nome;
 	}
 
-	public String getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-
 	public Vertice getPonta1() {
 		return ponta1;
 	}
@@ -78,6 +60,14 @@ public class Aresta {
 
 	public int getId() {
 		return id;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
 	}
 
 }

@@ -16,7 +16,7 @@ import graph_types.Vertice;
 public abstract class DFS {
 
 	private static int tempoAux;
-	private static VerticeDFS[] resultados; // cada vertice é vinculado a um map da lista
+	private static VerticeDFS[] resultados; 
 
 	// função criará uma lista de VerticeDFS com os seus contextos
 	private static void initilize(GrafoLista g) {
