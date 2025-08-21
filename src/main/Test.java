@@ -20,26 +20,14 @@ public class Test {
 		GrafoLista g = new GrafoLista("Grafo 1");
 
 		g.addVertices(4);
-		g.addAresta(1, 3);
-		g.addAresta(1, 2);
-		g.addAresta(2, 3);
-		g.addAresta(2, 4);
-		g.addAresta(4, 1);
-		
-		// adicionando valores nas arestas
-		g.getArestaById(1).setValue(7);
-		g.getArestaById(2).setValue(-3);
-		g.getArestaById(3).setValue(4);
-		g.getArestaById(4).setValue(-1);
-		g.getArestaById(5).setValue(3);
+		g.addAresta(1, 3, 7);
+		g.addAresta(1, 2, -3);
+		g.addAresta(2, 3, 4);
+		g.addAresta(2, 4, -1);
+		g.addAresta(4, 1, 3);
+
 
 		Result listaDeResultados = BellmanFord.run(g);
-
-		// Vertice
-		// cor
-		// td - Tempo de descoberta
-		// tf - Tempo de finalizacao
-		// Vertice predecessor
 		
 		if (listaDeResultados.isSuccess()) {
 			System.out.println("Não há ciclo negativo...");

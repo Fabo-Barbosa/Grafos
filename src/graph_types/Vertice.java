@@ -100,6 +100,10 @@ public class Vertice {
 		return this.vizinhanca;
 	}
 
+	public ArrayList<Aresta> getArestasAdjacentes() {
+		return arestasAdjacentes;
+	}
+
 	// Getters and Setters
 	public int getId() {
 		return id;

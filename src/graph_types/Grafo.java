@@ -50,7 +50,7 @@ public abstract class Grafo {
 	// funções principais de um grafo
 	public abstract void addVertice();
 	public abstract void addVertices(int quant);
-	public abstract void addAresta(int idVertice1, int idVertice2);
+	public abstract void addAresta(int idVertice1, int idVertice2, int value);
 	public abstract List<Vertice> getConjuntoDeVertices();
 	public abstract List<Aresta> getConjuntoDeArestas();
 

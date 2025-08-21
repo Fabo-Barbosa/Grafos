@@ -21,13 +21,13 @@ public class Aresta {
 	// não seja possível a criação de uma aresta fora de um grafo
 
 	// um construtor sem informar o nome da aresta
-	protected Aresta(Vertice p1, Vertice p2, int id) {
+	protected Aresta(Vertice p1, Vertice p2, int id, int value) {
 
-		this(p1, p2, id, "");
+		this(p1, p2, id, value, "");
 	}
 
 	// construtor que aceita também uma tag
-	protected Aresta(Vertice p1, Vertice p2, int id, String nome) {
+	protected Aresta(Vertice p1, Vertice p2, int id, int value, String nome) {
 
 		// assim que o contrutor for chamado incrementa 1
 		// na quantidade de arestas e atribui ao id da aresta
@@ -35,6 +35,7 @@ public class Aresta {
 		this.ponta1 = p1;
 		this.ponta2 = p2;
 		this.id = id;
+		this.value = value;
 		this.nome = nome;
 
 		p1.addAdjacencia(this);

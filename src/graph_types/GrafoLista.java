@@ -50,7 +50,7 @@ public class GrafoLista extends Grafo {
 	// adiciona uma aresta entre dois vértices que ainda não estão
 	// conectados, caso o grafo tenha 1 ou nenhum vértice ele mata a função
 	// ideia: Adaptar para retornar um booleano
-	public void addAresta(int idVertice1, int idVertice2) {
+	public void addAresta(int idVertice1, int idVertice2, int value) {
 
 		if (super.getQuantidadeVertice() < 2) {
 
@@ -75,7 +75,7 @@ public class GrafoLista extends Grafo {
 		} else {
 
 			super.setQuantAresta();
-			this.conjuntoDeArestas.add(new Aresta(v1, v2, super.getQuantidadeAresta()));
+			this.conjuntoDeArestas.add(new Aresta(v1, v2, super.getQuantidadeAresta(), value));
 		}
 	}
 
