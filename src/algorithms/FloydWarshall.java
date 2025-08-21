@@ -1,5 +1,7 @@
 package algorithms;
 
+// link para o repositório: https://github.com/Fabo-Barbosa/Grafos/tree/main/src
+
 import graph_types.Aresta;
 import graph_types.Grafo;
 import graph_types.GrafoLista;
@@ -59,8 +61,28 @@ public class FloydWarshall {
 					matrizPeso[i][j] = 0;
 					matrizPred[i][j] = i;
 				}
-			}		
+			}	
+		}
+		
+		// laço do algoritmo ############################# FLOYD WARSHALL ###############################
+		for (int k = 0; k < dimensao; k++) {
+			for (int i = 0; i < dimensao; i++) {
+				for (int j = 0; j < dimensao; j++) {
+					if (matrizPeso[i][j] > (matrizPeso[i][k] + matrizPeso[k][j])) {
+						matrizPeso[i][j] = matrizPeso[i][k] + matrizPeso[k][j];
+						matrizPred[i][j] = matrizPred[k][j];
+					}
+				}
+			}
+		}
+		
+		// exibindo os resultados
+		for (int[] l : matrizPeso) {
+			System.out.print("|");
+			for (int p : l) {
+				System.out.printf("%2d ", p);
+			}
+			System.out.println("|");
 		}
 	}
-
 }
